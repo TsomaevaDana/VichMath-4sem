@@ -55,6 +55,9 @@ myFoldr1 f [] = error "nothing in list"
 myFoldr1 f [x] = x  
 myFoldr1 f (x:xs) = x `f` (myFoldr1 f xs)
 
+myReverse :: [a] -> [a]
+myReverse xs = foldl (\x y -> y : x) [] xs
+
 
 
 {-
