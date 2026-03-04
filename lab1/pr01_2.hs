@@ -36,6 +36,27 @@ myUnzipSave :: ([(a, b)], Either [a] [b]) -> ([a],[b])
 myUnzipSave ([], Right x) = ([], x)
 myUnzipSave ([], Left x) = (x, [])
 myUnzipSave (((x,y): xs), z) = ((x : myFstf2 (myUnzipSave (xs, z))), (y : mySndf2 (myUnzipSave (xs, z))))
+
+myHead :: [ls] -> ls
+myHead [] = error "nothing in list"
+myHead (x:_) = x
+
+myTail :: [ls] -> [ls]
+myTail [] = error "nothing in list"
+myTail (_:x) = x
+
+myFoldl1 :: (a -> a -> a) -> [a] -> a 
+myFoldl1 f [] = error "nothing in list"  
+myFoldl1 f [x] = x  
+myFoldl1 f (x:xs) = myFoldl1 f (x `f` (myHead xs) : (myTail xs))
+
+myFoldr1 :: (a -> a -> a) -> [a] -> a 
+myFoldr1 f [] = error "nothing in list"  
+myFoldr1 f [x] = x  
+myFoldr1 f (x:xs) = x `f` (myFoldr1 f xs)
+
+
+
 {-
 
 Напишите реализацию функций:
