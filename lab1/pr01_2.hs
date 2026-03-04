@@ -4,6 +4,27 @@
 
 module Pr01_2 where
 
+myZip :: [a] -> [b] -> [(a, b)]
+myZip [] _ = []
+myZip _ [] = []
+myZip (x:xs) (y:ys) = (x,y) : myZip xs ys
+
+myLength:: [a] -> Int
+myLength [] = 0
+myLength (x:xs) = 1 + myLength xs
+
+mySndf2 :: (a, b) -> b
+mySndf2    (x, y) = y
+
+myFstf2 :: (a, b) -> a
+myFstf2   (x, y) = x
+
+myZipSave :: [a] -> [b] -> ([(a, b)], Either [a] [b])
+myZipSave [] x = ([], Right x)
+myZipSave x [] = ([], Left x)
+myZipSave (x:xs) (y:ys) = (left,right) where
+    left = (x,y) : myFstf2 (myZipSave xs ys)
+    right = mySndf2 (myZipSave xs ys)
 {-
 
 Напишите реализацию функций:
