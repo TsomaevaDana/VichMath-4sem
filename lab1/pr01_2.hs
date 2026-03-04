@@ -25,6 +25,17 @@ myZipSave x [] = ([], Left x)
 myZipSave (x:xs) (y:ys) = (left,right) where
     left = (x,y) : myFstf2 (myZipSave xs ys)
     right = mySndf2 (myZipSave xs ys)
+
+
+myUnzip :: [(a, b)] -> ([a],[b])
+myUnzip [] = ([], [])
+myUnzip ((x,y): xs) = ((x : myFstf2( myUnzip xs)), (y : mySndf2(myUnzip xs)))
+
+
+myUnzipSave :: ([(a, b)], Either [a] [b]) -> ([a],[b])
+myUnzipSave ([], Right x) = ([], x)
+myUnzipSave ([], Left x) = (x, [])
+myUnzipSave (((x,y): xs), z) = ((x : myFstf2 (myUnzipSave (xs, z))), (y : mySndf2 (myUnzipSave (xs, z))))
 {-
 
 Напишите реализацию функций:
