@@ -4,7 +4,6 @@
 
 module Pr01_2 where
 
-myZip :: [a] -> [b] -> [(a, b)]
 myZip [] _ = []
 myZip _ [] = []
 myZip (x:xs) (y:ys) = (x,y) : myZip xs ys
@@ -58,7 +57,22 @@ myFoldr1 f (x:xs) = x `f` (myFoldr1 f xs)
 myReverse :: [a] -> [a]
 myReverse xs = foldl (\x y -> y : x) [] xs
 
+myTakeWhile :: (a -> Bool) -> [a] -> [a]
+myTakeWhile  n [] = []
+myTakeWhile  n  (x:xs) = foldr (\x y -> if n x == True then x: y else []) [] (x:xs)
 
+{-mySpan :: (a -> Bool) -> [a] -> ([a],[a])
+mySpan n [] = ([],[])
+mySpan n (x:xs) = foldr (AAAAAAAAAAA)-}
+
+myMaybe:: (a -> b) -> b -> Maybe a -> b
+myMaybe _ x Nothing = x
+myMaybe f _ (Just x) = f x
+
+
+
+{-allM :: (a -> Bool) -> [a] -> Bool
+allM p = foldr (\x b -> p x && b) True-}
 
 {-
 
